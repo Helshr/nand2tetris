@@ -14,17 +14,15 @@ CHIP Xor {
 
     PARTS:
 
-    Nand(a = a, b = a, out = notA);
-    Nand(a = notA, b = b, out = o1);
-    Nand(a = notA, b = b, out = o2);
-    Nand(a = o1, b = o2, out = andLeft); 
+    // 第一种实现方式: Or(And(Not(a), b), And(a, Not(b)))
+    // Not(in = a, out = notA);
+    // And(a = notA, b = b, out = andLeft);
+    // Not(in = b, out = notB);
+    // And(a = a, b = notB, out = andRight);
+    // Or(a = andLeft, b = andRight, out = out);
 
-    Nand(a = b, b = b, out = notB);
-    Nand(a = a, b = notB, out = o3);
-    Nand(a = a, b = notB, out = o4);
-    Nand(a = o3, b = o4, out = andRight); 
-
-    Nand(a = andLeft, b = andLeft, out = o5);
-    Nand(a = andRight, b = andRight, out = o6);
-    Nand(a = o5, b = o6, out = out);
+    // 第二种实现方式: And(Nand(a, b), Or(a, b))
+    Nand(a = a, b = b, out = nandOut);
+    Or(a = a, b = b, out = orOut);
+    And(a = nandOut, b = orOut, out = out);
 }
