@@ -47,18 +47,18 @@ CHIP ALU {
     Mux16(a=x, b=false, sel=zx, out=zxResult);
     // if (nx == 1) set x = !x
     Not16(in=zxResult, out=notZxResult);
-    Mux16(a=x, b=notZxResult, sel=nx, out=nxResult);
+    Mux16(a=zxResult, b=notZxResult, sel=nx, out=nxResult);
 
     // if (zy == 1) set y = 0
     Mux16(a=y, b=false, sel=zy, out=zyResult);
     // if (ny == 1) set y = !y
     Not16(in=zyResult, out=notZyResult);
-    Mux16(a=y, b=notZyResult, sel=ny, out=nyResult);
+    Mux16(a=zyResult, b=notZyResult, sel=ny, out=nyResult);
 
     // x & y 
-    And16(a=x, b=y, out=xAndY);
+    And16(a=nxResult, b=nyResult, out=xAndY);
     // x + y 
-    Add16(a=x, b=y, out=xPlusY);
+    Add16(a=nxResult, b=nyResult, out=xPlusY);
     // f result
     Mux16(a=xAndY, b=xPlusY, sel=f, out=fResult);
 
