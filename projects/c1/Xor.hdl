@@ -20,7 +20,7 @@ CHIP Xor {
     // Not(in = b, out = notB);
     // And(a = a, b = notB, out = andRight);
     // Or(a = andLeft, b = andRight, out = out);
-
+d
     // 第二种实现方式: And(Nand(a, b), Or(a, b))
     Nand(a = a, b = b, out = nandOut);
     Or(a = a, b = b, out = orOut);
