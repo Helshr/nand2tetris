@@ -21,16 +21,17 @@
     D = M
     @R0
     D = D - M
-    @END
-    D;JGE
+    @End
+    D;JGE // if (i - R0) > 0 goto End
     @R1
     D = M
     @R2
-    M = M + D
+    M = D + M
     @i
     M = M + 1
-    @LOOP
+@LOOP
     0;JMP
 (END)
-    @END
-    0;JMP
+@End
+0;JMP
+
